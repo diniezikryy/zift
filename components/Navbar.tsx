@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import toast from "react-hot-toast";
 import { useAuthHook } from "../context/AuthContext";
 
 const Navbar = ({ children }: { children: React.ReactNode }) => {
@@ -28,10 +29,12 @@ const Navbar = ({ children }: { children: React.ReactNode }) => {
     try {
       await logOut();
       router.push("/login");
+      toast.success("You have been successfully logged out!");
     } catch (error: any) {
       console.log(error.message);
     }
   };
+
   return (
     <>
       <header className="container sticky top-0 z-50 flex flex-wrap items-center justify-between max-w-full p-6 mx-auto bg-white shadow-md">

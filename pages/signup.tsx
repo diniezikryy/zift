@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { useAuthHook } from "../context/AuthContext";
 
 interface SignupType {
@@ -25,6 +26,7 @@ const SignupPage = () => {
     try {
       await signUp(data.email, data.password);
       router.push("/dashboard");
+      toast.success("You have successfully signed up and logged in!");
     } catch (error: any) {
       console.log(error.message);
     }
