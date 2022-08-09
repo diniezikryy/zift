@@ -26,6 +26,7 @@ const LoginPage = () => {
       router.push("/dashboard");
       toast.success("You have successfully logged in!");
     } catch (error: any) {
+      toast.error(error.message);
       console.log(error.message);
     }
   };
