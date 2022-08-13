@@ -4,8 +4,6 @@ import Navbar from "../components/Navbar";
 import { AuthContextProvider } from "../context/AuthContext";
 import toast, { Toaster } from "react-hot-toast";
 
-const notify = () => toast("Here is your toast");
-
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <AuthContextProvider>
