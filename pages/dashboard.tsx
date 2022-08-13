@@ -1,4 +1,6 @@
 import ProtectedRoute from "../components/ProtectedRoute";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../config/firebase";
 
 const DashboardPage = () => {
   return (
