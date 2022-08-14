@@ -11,8 +11,10 @@ interface LoginType {
 const LoginPage = () => {
   const methods = useForm<LoginType>({ mode: "onBlur" });
 
-  const { logIn } = useAuthHook();
+  const { logIn, user } = useAuthHook();
   const router = useRouter();
+
+  console.log("user id: ", user.uid);
 
   const {
     register,
@@ -23,7 +25,7 @@ const LoginPage = () => {
   const onSubmit = async (data: LoginType) => {
     try {
       await logIn(data.email, data.password);
-      router.push("/");
+      router.push(`${user.id}/dashboard`);
       toast.success("You have successfully logged in!");
     } catch (error: any) {
       toast.error(error.message);
