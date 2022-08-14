@@ -23,13 +23,14 @@ const LoginPage = () => {
   const onSubmit = async (data: LoginType) => {
     try {
       await logIn(data.email, data.password);
-      router.push("/dashboard");
+      router.push("/");
       toast.success("You have successfully logged in!");
     } catch (error: any) {
       toast.error(error.message);
       console.log(error.message);
     }
   };
+
   return (
     <div className="container mx-auto mt-12 border-2 border-gray-400 sign-up-form w-96">
       <h2 className="px-12 mt-8 text-2xl font-semibold text-center text-blue-900">

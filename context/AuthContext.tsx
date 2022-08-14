@@ -6,7 +6,7 @@ import {
   signOut,
 } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
-import { auth, db } from "../config/firebase";
+import { auth, db } from "../utils/firebase";
 
 interface UserType {
   email: string | null;
@@ -24,8 +24,6 @@ export const AuthContextProvider = ({
 }) => {
   const [user, setUser] = useState<UserType>({ email: null, uid: null });
   const [loading, setLoading] = useState<boolean>(true);
-
-  console.log(user);
 
   const signUp = (email: string, password: string) => {
     return createUserWithEmailAndPassword(auth, email, password).then(
@@ -49,7 +47,7 @@ export const AuthContextProvider = ({
 
   useEffect(() => {
     const unsubscribeFromFirebase = onAuthStateChanged(auth, (userInfo) => {
-      console.log(userInfo);
+      // console.log(userInfo);
       if (userInfo) {
         setUser({
           email: userInfo.email,

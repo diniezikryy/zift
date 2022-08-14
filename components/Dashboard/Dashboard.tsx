@@ -1,4 +1,4 @@
-import ProtectedRoute from "../components/ProtectedRoute";
+import ProtectedRoute from "../ProtectedRoute";
 import {
   doc,
   getDoc,
@@ -7,10 +7,11 @@ import {
   query,
   collectionGroup,
 } from "firebase/firestore";
-import { db } from "../config/firebase";
+import { db } from "../../utils/firebase";
 import { useState, useEffect } from "react";
+import Sidebar from "../Dashboard/Sidebar/Sidebar";
 
-const DashboardPage = () => {
+const Dashboard = () => {
   const [data, setData] = useState({});
 
   const fetchData = async () => {
@@ -45,18 +46,18 @@ const DashboardPage = () => {
     return docSnap.data();
   };
 
-  fetchData();
+  // fetchData();
 
   return (
     <ProtectedRoute>
       <div className="container flex py-2 mx-auto">
         <div className="px-12 py-24 mx-auto mt-24 overflow-y-hidden text-gray-600">
           <h2 className="text-2xl font-semibold">Dashboard...</h2>
-          <h3 className="text-xl font-semibold"></h3>
+          <Sidebar />
         </div>
       </div>
     </ProtectedRoute>
   );
 };
 
-export default DashboardPage;
+export default Dashboard;
