@@ -18,6 +18,12 @@ const Dashboard = () => {
     const docRef = doc(db, "users", "RjR2ZxyZg7h2qiIkiY7K0pcETp92");
     const docSnap = await getDoc(docRef);
 
+    if (docSnap.exists()) {
+      console.log("Document data: ", docSnap.data());
+    } else {
+      console.log("No such document");
+    }
+
     const colRef = collection(
       db,
       "users",
@@ -25,12 +31,6 @@ const Dashboard = () => {
       "boards"
     );
     const colSnap = await getDocs(colRef);
-
-    if (docSnap.exists()) {
-      console.log("Document data: ", docSnap.data());
-    } else {
-      console.log("No such document");
-    }
 
     colSnap.docs.map((doc) => {
       console.log("Docs: ");
