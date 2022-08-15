@@ -8,9 +8,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <AuthContextProvider>
       <Toaster />
-      <Navbar>
-        <Component {...pageProps} />
-      </Navbar>
+      <Component {...pageProps} />
     </AuthContextProvider>
   );
 }

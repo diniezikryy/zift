@@ -1,13 +1,25 @@
 import type { NextPage } from "next";
-import ProtectedRoute from "../components/ProtectedRoute";
-import Dashboard from "../components/Dashboard/Dashboard";
+import React, { useEffect } from "react";
+import Router from "next/router";
+import { useAuthHook } from "../context/AuthContext";
 
 const Home: NextPage = () => {
+  const { user } = useAuthHook();
+  const { pathname } = Router;
+
+  useEffect(() => {
+    if (!user.uid) {
+      Router.push("/login");
+    }
+
+    if (pathname === "/" && user.uid != undefined) {
+      Router.push(`/${user.uid}/dashboard`);
+    }
+  }, []);
+
   return (
     <div>
-      <ProtectedRoute>
-        <Dashboard />
-      </ProtectedRoute>
+      <h1>Pushing you to dashboard...</h1>
     </div>
   );
 };

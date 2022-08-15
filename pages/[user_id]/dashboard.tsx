@@ -14,13 +14,13 @@ import Sidebar from "../../components/Dashboard/Sidebar/Sidebar";
 const DashboardPage = ({ boards }) => {
   return (
     <ProtectedRoute>
-      <div className="container flex py-2 mx-auto">
-        <div className="px-12 py-24 mx-auto mt-24 overflow-y-hidden text-gray-600">
+      <div className="flex flex-row justify-start h-screen">
+        <Sidebar />
+        <div className="flex-1 w-full p-4 bg-grey-light-secondary">
           {boards.map((board) => {
             return <h2>{board.name}</h2>;
           })}
-          <h2 className="text-2xl font-semibold"></h2>
-          <Sidebar />
+          <h2 className="text-2xl font-semibold">Tasks Dashboard</h2>
         </div>
       </div>
     </ProtectedRoute>
