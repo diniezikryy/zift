@@ -1,39 +1,51 @@
 import { collection, getDocs } from "firebase/firestore";
 import React, { useState } from "react";
 import { db } from "../../../utils/firebase";
-import KanbanLogo from "../../../assets/logo-light.svg";
+import KanbanLogo from "../../../assets/logo-dark.svg";
 import HideSidebar from "../../../assets/icon-hide-sidebar.svg";
-import ShowSidebar from "../../../assets/icon-show-sidebar.svg";
 
 interface SidebarProps {}
 
-const Sidebar = () => {
-  const [toggleCollapse, setToggleCollapse] = useState(false);
-
+const Sidebar = ({ toggleCollapse, handleSidebarToggle, boards }) => {
   return (
     <div
-      className={`flex flex-col justify-between h-screen px-4 pt-8 pb}-4 bg-white w-80 ${
-        toggleCollapse ? "w-20" : "w-80"
+      className={`relative flex flex-col h-screen p-8 bg-white w-80 ${
+        toggleCollapse ? "hidden" : "w-80"
       }`}
     >
-      <div className="flex flex-col">
-        <div className="relative flex items-center justify-between">
-          <div className="flex items-center gap-4 pl-1">
-            <KanbanLogo />
+      <div className="flex flex-col mb-14">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-4 pl-1 ">
             <span
               className={`mt-2 text-lg font-medium ${
                 toggleCollapse ? "hidden" : ""
               }`}
             >
-              Kanban
+              <KanbanLogo />
             </span>
           </div>
-          <button>
-            <HideSidebar />
-          </button>
         </div>
       </div>
-      <div></div>
+
+      <div className="flex flex-col border-2">
+        <h3>All boards</h3>
+        {boards.map((board) => {
+          return <h1>{board.name}</h1>;
+        })}
+      </div>
+
+      <div className="flex flex-row w-full mt-auto">
+        <button
+          className="flex flex-row items-center mr-4"
+          onClick={handleSidebarToggle}
+        >
+          <HideSidebar />
+
+          <h3 className="ml-4 text-xs font-bold leading-5 text-grey-light-tertiary">
+            Hide Sidebar
+          </h3>
+        </button>
+      </div>
     </div>
   );
 };

@@ -10,17 +10,34 @@ import {
 import { db } from "../../utils/firebase";
 import { useState, useEffect } from "react";
 import Sidebar from "../../components/Dashboard/Sidebar/Sidebar";
+import ShowSidebar from "../../assets/icon-show-sidebar.svg";
 
 const DashboardPage = ({ boards }) => {
+  const [toggleCollapse, setToggleCollapse] = useState(false);
+
+  const handleSidebarToggle = () => {
+    setToggleCollapse(!toggleCollapse);
+  };
   return (
     <ProtectedRoute>
       <div className="flex flex-row justify-start h-screen">
-        <Sidebar />
-        <div className="flex-1 w-full p-4 bg-grey-light-secondary">
-          {boards.map((board) => {
-            return <h2>{board.name}</h2>;
-          })}
+        <Sidebar
+          handleSidebarToggle={handleSidebarToggle}
+          toggleCollapse={toggleCollapse}
+          boards={boards}
+        />
+
+        <div className="relative flex-1 w-full p-4 bg-grey-light-secondary">
           <h2 className="text-2xl font-semibold">Tasks Dashboard</h2>
+          <div
+            className={`px-5 py-3.5 bg-purple-primary h-fit w-fit rounded-r-full absolute left-0 bottom-4 ${
+              toggleCollapse ? "" : "hidden"
+            }`}
+          >
+            <button onClick={handleSidebarToggle}>
+              <ShowSidebar />
+            </button>
+          </div>
         </div>
       </div>
     </ProtectedRoute>
