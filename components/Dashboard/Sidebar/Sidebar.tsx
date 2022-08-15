@@ -28,9 +28,14 @@ const Sidebar = ({ toggleCollapse, handleSidebarToggle, boards }) => {
       </div>
 
       <div className="flex flex-col border-2">
-        <h3>All boards</h3>
+        <h3 className="mb-5 border-2">All boards</h3>
+
         {boards.map((board) => {
-          return <h1>{board.name}</h1>;
+          return (
+            <div className="py-4 border-2 bg-purple-primary">
+              <p className="text-xs leading-3 text-white">{board.name}</p>
+            </div>
+          );
         })}
       </div>
 
@@ -41,7 +46,7 @@ const Sidebar = ({ toggleCollapse, handleSidebarToggle, boards }) => {
         >
           <HideSidebar />
 
-          <h3 className="ml-4 text-xs font-bold leading-5 text-grey-light-tertiary">
+          <h3 className="ml-4 text-xs font-bold leading-3 text-grey-light-tertiary">
             Hide Sidebar
           </h3>
         </button>

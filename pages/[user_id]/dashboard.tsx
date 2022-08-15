@@ -14,17 +14,19 @@ import ShowSidebar from "../../assets/icon-show-sidebar.svg";
 
 const DashboardPage = ({ boards }) => {
   const [toggleCollapse, setToggleCollapse] = useState(false);
+  const [boardsArr, setBoardsArr] = useState([...boards]);
 
   const handleSidebarToggle = () => {
     setToggleCollapse(!toggleCollapse);
   };
+
   return (
     <ProtectedRoute>
       <div className="flex flex-row justify-start h-screen">
         <Sidebar
           handleSidebarToggle={handleSidebarToggle}
           toggleCollapse={toggleCollapse}
-          boards={boards}
+          boards={boardsArr}
         />
 
         <div className="relative flex-1 w-full p-4 bg-grey-light-secondary">
