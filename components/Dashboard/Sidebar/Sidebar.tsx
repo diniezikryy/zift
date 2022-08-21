@@ -3,13 +3,17 @@ import React, { useState } from "react";
 import { db } from "../../../utils/firebase";
 import KanbanLogo from "../../../assets/logo-dark.svg";
 import HideSidebar from "../../../assets/icon-hide-sidebar.svg";
+import BoardIcon from "../../../assets/icon-board.svg";
 
 interface SidebarProps {}
 
 const Sidebar = ({ toggleCollapse, handleSidebarToggle, boards }) => {
+  const [selectedBoard, setSelectedBoard] = useState("Platform Launch");
+  const boardsArr = ["Platform Launch", "Marketing Plan", "Roadmap"];
+
   return (
     <div
-      className={`relative flex flex-col h-screen p-8 bg-white w-80 ${
+      className={`relative flex flex-col h-screen bg-white w-80 p-6 ${
         toggleCollapse ? "hidden" : "w-80"
       }`}
     >
@@ -27,14 +31,19 @@ const Sidebar = ({ toggleCollapse, handleSidebarToggle, boards }) => {
         </div>
       </div>
 
-      <div className="flex flex-col border-2">
-        <h3 className="mb-5 border-2">All boards</h3>
-
-        {boards.map((board) => {
+      <div className="flex flex-col justify-between">
+        <h3 className="pl-8 mb-5">All boards</h3>
+        {boardsArr.map((board) => {
           return (
-            <div className="py-4 border-2 bg-purple-primary">
-              <p className="text-xs leading-3 text-white">{board.name}</p>
-            </div>
+            <a
+              href="#"
+              className="flex flex-row items-center py-3.5 px-8 hover:bg-purple-primary"
+            >
+              <span className="mr-4">
+                <BoardIcon />
+              </span>
+              {board}
+            </a>
           );
         })}
       </div>
