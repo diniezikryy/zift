@@ -3,12 +3,19 @@ import React, { useState } from "react";
 import { db } from "../../../utils/firebase";
 import KanbanLogo from "../../../assets/logo-dark.svg";
 import HideSidebar from "../../../assets/icon-hide-sidebar.svg";
-import SunIcon from "../../../assets/icon-light-theme.svg";
-import MoonIcon from "../../../assets/icon-dark-theme.svg";
-interface SidebarProps {}
 
-const Sidebar = ({ toggleCollapse, handleSidebarToggle, boards }) => {
-  const [selectedBoard, setSelectedBoard] = useState("Platform Launch");
+interface SidebarProps {
+  toggleCollapse: boolean;
+  handleSidebarToggle: any;
+  boards: [];
+}
+
+const Sidebar = ({
+  toggleCollapse,
+  handleSidebarToggle,
+  boards,
+}: SidebarProps) => {
+  const [selectedBoard, setSelectedBoard] = useState<string>("Platform Launch");
   const boardsArr = ["Platform Launch", "Marketing Plan", "Roadmap"];
 
   return (
@@ -17,7 +24,7 @@ const Sidebar = ({ toggleCollapse, handleSidebarToggle, boards }) => {
         toggleCollapse ? "w-0 opacity-0" : "opacity-100 w-80 p-8"
       }`}
       style={{
-        transition: "width opacity 300ms cubic-bezier(0.2, 0, 0, 1) 0s",
+        transition: "width 300ms cubic-bezier(0.2, 0, 0, 1) 0s",
       }}
     >
       <div className="flex flex-col mb-14">
@@ -47,7 +54,7 @@ const Sidebar = ({ toggleCollapse, handleSidebarToggle, boards }) => {
                 className="group flex justify-between flex-row items-center text-grey-light-tertiary py-3.5 hover:text-purple-primary hover:rounded-lg"
               >
                 {board}
-                <span className="mr-4">
+                <span className="">
                   <svg
                     width="16"
                     height="16"
@@ -100,7 +107,7 @@ const Sidebar = ({ toggleCollapse, handleSidebarToggle, boards }) => {
       <div className="flex flex-row w-full mt-6">
         <button
           className="flex flex-row items-center mr-4"
-          onClick={handleSidebarToggle}
+          onClick={() => handleSidebarToggle()}
         >
           <HideSidebar />
 

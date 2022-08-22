@@ -11,11 +11,13 @@ import { db } from "../../utils/firebase";
 import { useState, useEffect } from "react";
 import Sidebar from "../../components/Dashboard/Sidebar/Sidebar";
 import ShowSidebar from "../../assets/icon-show-sidebar.svg";
-import { Transition } from "@headlessui/react";
 
-const DashboardPage = ({ boards }) => {
+interface DashboardProps {
+  boards: [];
+}
+
+const DashboardPage = ({ boards }: DashboardProps) => {
   const [toggleCollapse, setToggleCollapse] = useState(false);
-  const [boardsArr, setBoardsArr] = useState([...boards]);
 
   const handleSidebarToggle = () => {
     setToggleCollapse(!toggleCollapse);
@@ -28,7 +30,7 @@ const DashboardPage = ({ boards }) => {
           <Sidebar
             handleSidebarToggle={handleSidebarToggle}
             toggleCollapse={toggleCollapse}
-            boards={boardsArr}
+            boards={boards}
           />
         </div>
 
