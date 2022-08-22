@@ -19,6 +19,7 @@ module.exports = {
       "grey-light-tertiary": "#828FA3",
       "red-primary": "#EA5555",
       "red-secondary": "#FF9898",
+      test: "#979797",
     },
     extend: {
       fontFamily: {

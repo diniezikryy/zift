@@ -10,6 +10,7 @@ import {
 import { db } from "../../utils/firebase";
 import { useState, useEffect } from "react";
 import Sidebar from "../../components/Dashboard/Sidebar/Sidebar";
+import Navbar from "../../components/Dashboard/Sidebar/Navbar";
 import ShowSidebar from "../../assets/icon-show-sidebar.svg";
 
 interface DashboardProps {
@@ -26,7 +27,7 @@ const DashboardPage = ({ boards }: DashboardProps) => {
   return (
     <ProtectedRoute>
       <div className="flex flex-row justify-start h-screen">
-        <div className="">
+        <div className="shadow-2xl shadow-black">
           <Sidebar
             handleSidebarToggle={handleSidebarToggle}
             toggleCollapse={toggleCollapse}
@@ -34,8 +35,9 @@ const DashboardPage = ({ boards }: DashboardProps) => {
           />
         </div>
 
-        <div className="relative flex-1 w-full p-4 bg-grey-light-secondary">
-          <h2 className="text-2xl font-semibold">Tasks Dashboard</h2>
+        <div className="relative flex-1 w-full bg-grey-light-secondary">
+          <Navbar />
+
           <div
             className={`px-5 py-3.5 bg-purple-primary h-fit w-fit rounded-r-full absolute left-0 bottom-4 ${
               toggleCollapse ? "" : "hidden"

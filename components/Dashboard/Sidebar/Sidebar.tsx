@@ -20,7 +20,7 @@ const Sidebar = ({
 
   return (
     <div
-      className={`flex flex-col h-screen bg-white ${
+      className={`flex flex-col h-screen bg-white drop-shadow-lg shadow-black ${
         toggleCollapse ? "w-0 opacity-0" : "opacity-100 w-80 p-8"
       }`}
       style={{
