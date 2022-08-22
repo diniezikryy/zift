@@ -11,6 +11,7 @@ import { db } from "../../utils/firebase";
 import { useState, useEffect } from "react";
 import Sidebar from "../../components/Dashboard/Sidebar/Sidebar";
 import ShowSidebar from "../../assets/icon-show-sidebar.svg";
+import { Transition } from "@headlessui/react";
 
 const DashboardPage = ({ boards }) => {
   const [toggleCollapse, setToggleCollapse] = useState(false);
@@ -23,11 +24,13 @@ const DashboardPage = ({ boards }) => {
   return (
     <ProtectedRoute>
       <div className="flex flex-row justify-start h-screen">
-        <Sidebar
-          handleSidebarToggle={handleSidebarToggle}
-          toggleCollapse={toggleCollapse}
-          boards={boardsArr}
-        />
+        <div className="">
+          <Sidebar
+            handleSidebarToggle={handleSidebarToggle}
+            toggleCollapse={toggleCollapse}
+            boards={boardsArr}
+          />
+        </div>
 
         <div className="relative flex-1 w-full p-4 bg-grey-light-secondary">
           <h2 className="text-2xl font-semibold">Tasks Dashboard</h2>

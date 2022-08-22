@@ -24,6 +24,12 @@ module.exports = {
       fontFamily: {
         sans: ["Plus Jakarta Sans", "sans-serif"],
       },
+      keyframes: {
+        slideIn: {
+          "0%, 75%": { opacity: "0" },
+          100: { opacity: "100" },
+        },
+      },
     },
   },
   plugins: [],

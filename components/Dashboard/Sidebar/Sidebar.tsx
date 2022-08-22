@@ -13,9 +13,12 @@ const Sidebar = ({ toggleCollapse, handleSidebarToggle, boards }) => {
 
   return (
     <div
-      className={`transition-transform ease-in-out flex flex-col h-screen bg-white w-80 p-8 ${
-        toggleCollapse ? "hidden" : "w-80"
+      className={`flex flex-col h-screen bg-white ${
+        toggleCollapse ? "w-0 opacity-0" : "opacity-100 w-80 p-8"
       }`}
+      style={{
+        transition: "width opacity 300ms cubic-bezier(0.2, 0, 0, 1) 0s",
+      }}
     >
       <div className="flex flex-col mb-14">
         <div className="flex items-center justify-between">
@@ -41,7 +44,7 @@ const Sidebar = ({ toggleCollapse, handleSidebarToggle, boards }) => {
             return (
               <a
                 href="#"
-                className="group flex justify-between flex-row items-center text-grey-light-tertiary py-3.5 hover:text-purple-primary hover:text-white hover:rounded-lg"
+                className="group flex justify-between flex-row items-center text-grey-light-tertiary py-3.5 hover:text-purple-primary hover:rounded-lg"
               >
                 {board}
                 <span className="mr-4">
