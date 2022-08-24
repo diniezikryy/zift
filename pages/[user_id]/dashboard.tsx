@@ -13,43 +13,46 @@ import Sidebar from "../../components/Dashboard/Sidebar/Sidebar";
 import Navbar from "../../components/Dashboard/Sidebar/Navbar";
 import ShowSidebar from "../../assets/icon-show-sidebar.svg";
 
-interface DashboardProps {
-  boards: [];
-}
+interface DashboardProps {}
 
-const DashboardPage = ({ boards }: DashboardProps) => {
-  const [toggleCollapse, setToggleCollapse] = useState(false);
+const DashboardPage = ({ boards }) => {
+  const [toggleCollapse, setToggleCollapse] = useState<boolean>(false);
+  const [selectedBoard, setSelectedBoard] = useState<string>("Platform Launch");
+
+  console.log(boards);
 
   const handleSidebarToggle = () => {
     setToggleCollapse(!toggleCollapse);
   };
 
   return (
-    <ProtectedRoute>
-      <div className="flex flex-row justify-start h-screen">
-        <div className="shadow-2xl shadow-black">
-          <Sidebar
-            handleSidebarToggle={handleSidebarToggle}
-            toggleCollapse={toggleCollapse}
-            boards={boards}
-          />
-        </div>
+    <>
+      <ProtectedRoute>
+        <div className="flex flex-row justify-start h-screen">
+          <div>
+            <Sidebar
+              handleSidebarToggle={handleSidebarToggle}
+              toggleCollapse={toggleCollapse}
+              boards={boards}
+            />
+          </div>
 
-        <div className="relative flex-1 w-full bg-grey-light-secondary">
-          <Navbar />
+          <div className="relative flex-1 w-full bg-grey-light-secondary">
+            <Navbar boardName={selectedBoard} />
 
-          <div
-            className={`px-5 py-3.5 bg-purple-primary h-fit w-fit rounded-r-full absolute left-0 bottom-4 ${
-              toggleCollapse ? "" : "hidden"
-            }`}
-          >
-            <button onClick={handleSidebarToggle}>
-              <ShowSidebar />
-            </button>
+            <div
+              className={`px-5 py-3.5 bg-purple-primary h-fit w-fit rounded-r-full absolute left-0 bottom-4 ${
+                toggleCollapse ? "" : "hidden"
+              }`}
+            >
+              <button onClick={handleSidebarToggle}>
+                <ShowSidebar />
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    </ProtectedRoute>
+      </ProtectedRoute>
+    </>
   );
 };
 

@@ -15,13 +15,15 @@ const Sidebar = ({
   handleSidebarToggle,
   boards,
 }: SidebarProps) => {
-  const [selectedBoard, setSelectedBoard] = useState<string>("Platform Launch");
+  // const [selectedBoard, setSelectedBoard] = useState<string>("Platform Launch");
   const boardsArr = ["Platform Launch", "Marketing Plan", "Roadmap"];
 
   return (
     <div
-      className={`flex flex-col h-screen bg-white drop-shadow-lg shadow-black ${
-        toggleCollapse ? "w-0 opacity-0" : "opacity-100 w-80 p-8"
+      className={`flex flex-col h-screen ${
+        toggleCollapse
+          ? "w-0 opacity-0"
+          : "opacity-100 w-80 p-8 shadow-2xl bg-white"
       }`}
       style={{
         transition: "width 300ms cubic-bezier(0.2, 0, 0, 1) 0s",
