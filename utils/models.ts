@@ -16,6 +16,6 @@ export interface Column {
 }
 
 export interface Board {
-  boardName: string;
+  name: string;
   columns: Column[];
 }

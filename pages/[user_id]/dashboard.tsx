@@ -9,17 +9,19 @@ import {
 } from "firebase/firestore";
 import { db } from "../../utils/firebase";
 import { useState, useEffect } from "react";
-import Sidebar from "../../components/Dashboard/Sidebar/Sidebar";
-import Navbar from "../../components/Dashboard/Sidebar/Navbar";
+import Sidebar from "../../components/dashboard/Sidebar/Sidebar";
+import Navbar from "../../components/dashboard/Navbar";
 import ShowSidebar from "../../assets/icon-show-sidebar.svg";
+import { Board } from "../../utils/models";
+import Dashboard from "../../components/dashboard/Dashboard";
 
-interface DashboardProps {}
+interface Props {
+  boards: Board[];
+}
 
-const DashboardPage = ({ boards }) => {
+const DashboardPage: React.FC<Props> = ({ boards }) => {
   const [toggleCollapse, setToggleCollapse] = useState<boolean>(false);
   const [selectedBoard, setSelectedBoard] = useState<string>("Platform Launch");
-
-  console.log(boards);
 
   const handleSidebarToggle = () => {
     setToggleCollapse(!toggleCollapse);
@@ -29,16 +31,16 @@ const DashboardPage = ({ boards }) => {
     <>
       <ProtectedRoute>
         <div className="flex flex-row justify-start h-screen">
-          <div>
-            <Sidebar
-              handleSidebarToggle={handleSidebarToggle}
-              toggleCollapse={toggleCollapse}
-              boards={boards}
-            />
-          </div>
+          <Sidebar
+            handleSidebarToggle={handleSidebarToggle}
+            toggleCollapse={toggleCollapse}
+            boards={boards}
+          />
 
-          <div className="relative flex-1 w-full bg-grey-light-secondary">
+          <div className="relative flex flex-col flex-1 w-full bg-grey-light-secondary">
             <Navbar boardName={selectedBoard} />
+
+            <Dashboard />
 
             <div
               className={`px-5 py-3.5 bg-purple-primary h-fit w-fit rounded-r-full absolute left-0 bottom-4 ${
