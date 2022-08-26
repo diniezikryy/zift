@@ -8,7 +8,7 @@ import { Board } from "../../../utils/models";
 interface SidebarProps {
   toggleCollapse: boolean;
   handleSidebarToggle: any;
-  boards: Board[];
+  boards: string[];
 }
 
 const Sidebar = ({
@@ -52,7 +52,7 @@ const Sidebar = ({
               href="#"
               className="group flex justify-between flex-row items-center text-grey-light-tertiary py-3.5 hover:text-purple-primary hover:rounded-lg"
             >
-              {board.name}
+              {board}
               <span className="">
                 <svg
                   width="16"

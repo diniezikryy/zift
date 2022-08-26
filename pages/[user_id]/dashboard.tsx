@@ -6,6 +6,7 @@ import {
   getDocs,
   query,
   collectionGroup,
+  QuerySnapshot,
 } from "firebase/firestore";
 import { db } from "../../utils/firebase";
 import { useState, useEffect } from "react";
@@ -16,10 +17,12 @@ import { Board } from "../../utils/models";
 import Dashboard from "../../components/dashboard/Dashboard";
 
 interface Props {
-  boards: Board[];
+  userId: string;
+  boardsId: string[];
+  boards: string[];
 }
 
-const DashboardPage: React.FC<Props> = ({ boards }) => {
+const DashboardPage: React.FC<Props> = ({ userId, boardsId, boards }) => {
   const [toggleCollapse, setToggleCollapse] = useState<boolean>(false);
   const [selectedBoard, setSelectedBoard] = useState<string>("Platform Launch");
 
@@ -82,7 +85,9 @@ export const getStaticProps = async (context: any) => {
 
   return {
     props: {
-      boards: colSnap.docs.map((doc) => doc.data()),
+      userId: id,
+      boardsId: colSnap.docs.map((doc) => doc.id),
+      boards: colSnap.docs.map((doc) => doc.data().name),
     },
   };
 };
