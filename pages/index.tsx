@@ -17,6 +17,10 @@ const Home: NextPage = () => {
     if (!user.uid) {
       Router.push("/login");
     }
+
+    if (user.uid !== undefined) {
+      Router.push(`${user.uid}`);
+    }
   }, []);
 
   return (
