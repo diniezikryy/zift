@@ -1,11 +1,17 @@
-import { collection, collectionGroup, getDocs } from "firebase/firestore";
+import {
+  collection,
+  collectionGroup,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
 import { useRouter } from "next/router";
 import React from "react";
 import { db } from "../../../utils/firebase";
 
 export async function getStaticPaths() {
-  const paths = [];
-  const boardsId = [];
+  const paths: object[] = [];
+  const boardsId: string[] = [];
 
   const colRef = collection(db, "users");
   const colSnap = await getDocs(colRef);
@@ -34,25 +40,42 @@ export async function getStaticPaths() {
 
 export const getStaticProps = async (context: any) => {
   const user_id = context.params.user_id;
-  const colRef = collection(db, "users", user_id, "boards");
-  const colSnap = await getDocs(colRef);
+  const board_id = context.params.dashboard_id;
 
-  const allBoards = await getDocs(collectionGroup(db, "boards"));
+  // Fetches the columns of the dashboard according to dashboard_id
+  const columnsRef = collection(
+    db,
+    `users/${user_id}/boards/${board_id}/columns`
+  );
+  const columnsSnapshot = await getDocs(columnsRef);
+
+  // Fetches the tasks of the dashboard according to dashboard_id
+  const tasksRef = collection(
+    db,
+    `users/${user_id}/boards/${board_id}/columns/W9hM4c0UMy8ECVEcCygz/tasks`
+  );
+  const tasksSnapshot = await getDocs(tasksRef);
+
   return {
     props: {
-      boards: colSnap.docs.map((doc) => doc.data()),
-      allBoards: allBoards.docs.map((board) => board.id),
+      columns: columnsSnapshot.docs.map((doc) => doc.id),
+      tasks: tasksSnapshot.docs.map((doc) => doc.data()),
     },
   };
 };
 
-const DashboardPage = ({ boards, allBoards }) => {
+interface DashboardPageProps {
+  columns: string[];
+  tasks: object[];
+}
+
+const DashboardPage = ({ columns, tasks }: DashboardPageProps) => {
   // This page should fetch the columns data from the firestore.
-
-  console.log(allBoards);
-
   const router = useRouter();
   const { user_id, dashboard_id } = router.query;
+
+  console.log(columns);
+  console.log(tasks);
 
   return (
     <div>
