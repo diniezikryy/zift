@@ -14,8 +14,6 @@ const LoginPage = () => {
   const { logIn, user } = useAuthHook();
   const router = useRouter();
 
-  console.log("user id: ", user.uid);
-
   const {
     register,
     handleSubmit,
@@ -24,8 +22,9 @@ const LoginPage = () => {
 
   const onSubmit = async (data: LoginType) => {
     try {
+      console.log(data);
       await logIn(data.email, data.password);
-      router.push(`${user.id}/dashboard`);
+      router.push(`/`);
       toast.success("You have successfully logged in!");
     } catch (error: any) {
       toast.error(error.message);
@@ -34,8 +33,8 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="container mx-auto mt-12 border-2 border-gray-400 sign-up-form w-96">
-      <h2 className="px-12 mt-8 text-2xl font-semibold text-center text-blue-900">
+    <div className="container mx-auto mt-12 border-2 border-gray-400 sign-up-form w-96 bg-grey-light-primary">
+      <h2 className="px-12 mt-8 text-2xl font-semibold text-center text-purple-primary">
         Log In
       </h2>
       <FormProvider {...methods}>
@@ -82,7 +81,9 @@ const LoginPage = () => {
               type="submit"
               className={`h-12 text-center w-2/3 bg-blue-900 border-2 rounded-md hover:shadow-lg hover:bg-blue-800 text-lg transition`}
             >
-              <p className="font-normal text-white capitalize">submit</p>
+              <p className="font-normal capitalize text-purple-primary">
+                submit
+              </p>
             </button>
           </div>
         </form>
