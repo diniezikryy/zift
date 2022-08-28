@@ -7,6 +7,7 @@ import {
 } from "firebase/firestore";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
+import DashboardLayout from "../../../components/DashboardLayout";
 import ProtectedRoute from "../../../components/ProtectedRoute";
 import { useAuthHook } from "../../../context/AuthContext";
 import { db } from "../../../utils/firebase";
@@ -88,10 +89,12 @@ const DashboardPage = ({ columns, tasks }: DashboardPageProps) => {
   return (
     <ProtectedRoute>
       <div>
-        This is the user {user_id} first dashboard page of id {dashboard_id}.
+        This is the user {user_id} dashboard page of id {dashboard_id}.
       </div>
     </ProtectedRoute>
   );
 };
+
+DashboardPage.PageLayout = DashboardLayout;
 
 export default DashboardPage;
