@@ -7,9 +7,10 @@ import {
 } from "firebase/firestore";
 import { useRouter } from "next/router";
 import React from "react";
+import ProtectedRoute from "../../../components/ProtectedRoute";
 import { db } from "../../../utils/firebase";
 
-export async function getStaticPaths() {
+export const getStaticPaths = async () => {
   const paths: object[] = [];
   const boardsId: string[] = [];
 
@@ -36,7 +37,7 @@ export async function getStaticPaths() {
     paths: paths,
     fallback: false,
   };
-}
+};
 
 export const getStaticProps = async (context: any) => {
   const user_id = context.params.user_id;
@@ -74,13 +75,12 @@ const DashboardPage = ({ columns, tasks }: DashboardPageProps) => {
   const router = useRouter();
   const { user_id, dashboard_id } = router.query;
 
-  console.log(columns);
-  console.log(tasks);
-
   return (
-    <div>
-      This is the user {user_id} first dashboard page of id {dashboard_id}.
-    </div>
+    <ProtectedRoute>
+      <div>
+        This is the user {user_id} first dashboard page of id {dashboard_id}.
+      </div>
+    </ProtectedRoute>
   );
 };
 

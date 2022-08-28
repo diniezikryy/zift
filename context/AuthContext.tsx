@@ -29,9 +29,9 @@ export const AuthContextProvider = ({
     return createUserWithEmailAndPassword(auth, email, password).then(
       (userCredential) => {
         setDoc(doc(db, "users", userCredential.user.uid), {
-          name: "",
-          boards: [],
+          email: email,
         });
+        // When user is first created, boards collection will not be created until one board document is inserted
       }
     );
   };

@@ -1,5 +1,6 @@
 import { collection, getDocs } from "firebase/firestore";
 import { useRouter } from "next/router";
+import ProtectedRoute from "../../components/ProtectedRoute";
 import { db } from "../../utils/firebase";
 
 export const getStaticPaths = async () => {
@@ -35,7 +36,11 @@ const UserPage = () => {
   const { user_id } = router.query;
   console.log(user_id);
 
-  return <div>This is the user page of user: {user_id}</div>;
+  return (
+    <ProtectedRoute>
+      <div>This is the user page of user: {user_id}</div>
+    </ProtectedRoute>
+  );
 };
 
 export default UserPage;

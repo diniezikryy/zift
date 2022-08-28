@@ -28,13 +28,13 @@ const SignupPage = () => {
       router.push("/");
       toast.success("You have successfully signed up and logged in!");
     } catch (error: any) {
-      console.log(error.message);
+      toast.error(error.message);
     }
   };
 
   return (
-    <div className="container mx-auto mt-12 border-2 border-gray-400 sign-up-form w-96">
-      <h2 className="px-12 mt-8 text-2xl font-semibold text-center text-blue-900">
+    <div className="container mx-auto mt-12 border-2 border-gray-400 sign-up-form w-96 bg-grey-light-primary">
+      <h2 className="px-12 mt-8 text-2xl font-semibold text-center text-blue-900 text-purple-primary">
         Sign Up
       </h2>
       <FormProvider {...methods}>
@@ -98,7 +98,9 @@ const SignupPage = () => {
               type="submit"
               className={`h-12 text-center w-2/3 bg-blue-900 border-2 rounded-md hover:shadow-lg hover:bg-blue-800 text-lg transition`}
             >
-              <p className="font-normal text-white capitalize">submit</p>
+              <p className="font-normal capitalize text-purple-primary">
+                submit
+              </p>
             </button>
           </div>
         </form>
