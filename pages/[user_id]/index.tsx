@@ -1,7 +1,8 @@
+import { signOut } from "firebase/auth";
 import { collection, getDocs } from "firebase/firestore";
 import { useRouter } from "next/router";
 import ProtectedRoute from "../../components/ProtectedRoute";
-import { db } from "../../utils/firebase";
+import { auth, db } from "../../utils/firebase";
 
 export const getStaticPaths = async () => {
   const colRef = collection(db, "users");
@@ -36,9 +37,14 @@ const UserPage = () => {
   const { user_id } = router.query;
   console.log(user_id);
 
+  const handleLogout = () => {
+    signOut(auth);
+  };
+
   return (
     <ProtectedRoute>
       <div>This is the user page of user: {user_id}</div>
+      <button onClick={handleLogout}>sign out</button>
     </ProtectedRoute>
   );
 };

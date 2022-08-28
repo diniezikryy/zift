@@ -6,8 +6,9 @@ import {
   where,
 } from "firebase/firestore";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect } from "react";
 import ProtectedRoute from "../../../components/ProtectedRoute";
+import { useAuthHook } from "../../../context/AuthContext";
 import { db } from "../../../utils/firebase";
 
 export const getStaticPaths = async () => {
@@ -74,6 +75,15 @@ const DashboardPage = ({ columns, tasks }: DashboardPageProps) => {
   // This page should fetch the columns data from the firestore.
   const router = useRouter();
   const { user_id, dashboard_id } = router.query;
+
+  const { user } = useAuthHook();
+
+  // Checks whether user is allowed to view this page
+  useEffect(() => {
+    if (user.uid !== user_id) {
+      console.log("Not allowed to view this page!");
+    }
+  }, []);
 
   return (
     <ProtectedRoute>
