@@ -1,4 +1,5 @@
 import React from "react";
+import Sidebar from "./Sidebar";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -6,8 +7,8 @@ interface DashboardLayoutProps {
 
 const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   return (
-    <div>
-      <h1>Sidebar in here lol</h1>
+    <div className="flex">
+      <Sidebar />
       <div>{children}</div>
     </div>
   );

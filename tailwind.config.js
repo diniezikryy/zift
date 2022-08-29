@@ -20,6 +20,8 @@ module.exports = {
       "red-primary": "#EA5555",
       "red-secondary": "#FF9898",
       test: "#979797",
+      "dark-purple": "#081A51",
+      "light-white": "rgba(255,255,255,0.18)",
     },
     extend: {
       fontFamily: {
