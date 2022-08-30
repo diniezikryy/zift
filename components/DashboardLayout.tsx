@@ -9,7 +9,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   return (
     <div className="flex">
       <Sidebar />
-      <div>{children}</div>
+      <div className="w-full bg-grey-light-primary">{children}</div>
     </div>
   );
 };
