@@ -1,5 +1,5 @@
 import React from "react";
-import { BsArrowLeftShort } from "react-icons/bs";
+import { BsArrowLeftShort, BsSearch } from "react-icons/bs";
 import { AiFillEnvironment } from "react-icons/ai";
 import { useState } from "react";
 
@@ -20,7 +20,11 @@ const Sidebar = () => {
           }`}
         />
         <div className="inline-flex">
-          <AiFillEnvironment className="block float-left mr-2 text-4xl rounded cursor-pointer bg-purple-primary" />
+          <AiFillEnvironment
+            className={`block float-left mr-2 text-4xl rounded cursor-pointer bg-purple-primary duration-500 ${
+              !open && "rotate-[360deg]"
+            }`}
+          />
           <h1
             className={`text-2xl font-medium text-white origin-left ${
               !open && "scale-0"
@@ -28,6 +32,25 @@ const Sidebar = () => {
           >
             Tailwind
           </h1>
+        </div>
+
+        <div
+          className={`flex items-center px-4 py-2 mt-6 rounded-md bg-light-white ${
+            !open ? "px-2.5" : "px-4"
+          }`}
+        >
+          <BsSearch
+            className={`float-left text-lg text-white cursor-pointer ${
+              open && "mr-2"
+            }`}
+          />
+          <input
+            type={"search"}
+            placeholder="Search"
+            className={`text-base bg-transparent w-full text-white focus:outline-none ${
+              !open && "hidden"
+            }`}
+          />
         </div>
       </div>
     </div>
