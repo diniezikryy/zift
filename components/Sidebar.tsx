@@ -3,25 +3,34 @@ import { BsArrowLeftShort, BsSearch } from "react-icons/bs";
 import { AiFillEnvironment } from "react-icons/ai";
 import { useState } from "react";
 
-// Presentation Layer -> Recieves the array of names of board names + create new board event listener
+// Presentation Component -> Recieves the array of names of board names + create new board event listener
 
 const Sidebar = () => {
   const [open, setOpen] = useState(false);
+  // To add functionality to set a selected board so that a selected board will be highlighted purple
 
   return (
     <div className="flex">
       <div
-        onClick={() => setOpen(!open)}
-        className={`relative h-screen border bg-white duration-300 flex flex-col ${
-          open ? "w-80 p-8" : "w-0 p-0 pt-0"
+        className={`relative h-screen bg-white duration-300 flex flex-col ${
+          open ? "w-80 py-8 pr-8 pl-0" : "w-0 p-0 pt-0"
         }`}
       >
-        <BsArrowLeftShort
-          className={`absolute text-3xl bg-white border rounded-full cursor-pointer text-dark-purple -right-3 top-9 border-dark-purple ${
-            !open && "rotate-180"
+        <div
+          onClick={() => setOpen(!open)}
+          className={`absolute p-5 rounded-r-full cursor-pointer bg-purple-primary w-min -right-14 bottom-8 ${
+            open && "scale-0"
           }`}
-        />
-        <div className="flex">
+        >
+          <svg width="16" height="11" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M15.815 4.434A9.055 9.055 0 0 0 8 0 9.055 9.055 0 0 0 .185 4.434a1.333 1.333 0 0 0 0 1.354A9.055 9.055 0 0 0 8 10.222c3.33 0 6.25-1.777 7.815-4.434a1.333 1.333 0 0 0 0-1.354ZM8 8.89A3.776 3.776 0 0 1 4.222 5.11 3.776 3.776 0 0 1 8 1.333a3.776 3.776 0 0 1 3.778 3.778A3.776 3.776 0 0 1 8 8.89Zm2.889-3.778a2.889 2.889 0 1 1-5.438-1.36 1.19 1.19 0 1 0 1.19-1.189H6.64a2.889 2.889 0 0 1 4.25 2.549Z"
+              fill="#FFF"
+            />
+          </svg>
+        </div>
+
+        <div className="flex ml-8">
           <svg
             width="153"
             height="26"
@@ -44,7 +53,7 @@ const Sidebar = () => {
         </div>
 
         <div
-          className={`mb-5 text-xs font-semibold tracking-widest text-grey-light-tertiary ${
+          className={`ml-8 mb-5 text-xs font-semibold tracking-widest text-grey-light-tertiary ${
             !open && "scale-0"
           }`}
         >
@@ -52,7 +61,7 @@ const Sidebar = () => {
         </div>
 
         <div className={`${!open && "scale-0"}`}>
-          <div className="flex items-center py-4 rounded-r-full hover:bg-grey-light-secondary group">
+          <div className="flex items-center py-4 pl-8 rounded-r-full hover:bg-grey-light-secondary group">
             <svg
               width="16"
               height="16"
@@ -69,7 +78,7 @@ const Sidebar = () => {
             </span>
           </div>
 
-          <div className="flex items-center py-4 rounded-r-full hover:bg-grey-light-secondary group">
+          <div className="flex items-center py-4 pl-8 rounded-r-full hover:bg-grey-light-secondary group">
             <svg
               width="16"
               height="16"
@@ -86,7 +95,7 @@ const Sidebar = () => {
             </span>
           </div>
 
-          <div className="flex items-center py-4 rounded-r-full hover:bg-grey-light-secondary group">
+          <div className="flex items-center py-4 pl-8 rounded-r-full hover:bg-grey-light-secondary group">
             <svg
               width="16"
               height="16"
@@ -105,7 +114,8 @@ const Sidebar = () => {
         </div>
 
         <div
-          className={`border flex group items-center mt-auto py-3.5 rounded-r-full hover:bg-grey-light-secondary ${
+          onClick={() => setOpen(!open)}
+          className={`pl-8 flex group items-center mt-auto py-3.5 rounded-r-full hover:bg-grey-light-secondary ${
             !open && "scale-0"
           }`}
         >
