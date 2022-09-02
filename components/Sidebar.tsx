@@ -11,7 +11,7 @@ import SidebarBoard from "./SidebarBoard";
 // Presentation Component -> Recieves the array of names of board names + create new board event listener
 
 const Sidebar = () => {
-  const [open, setOpen] = useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(true);
   const [boards, setBoards] = useState<any>([]);
   // To add functionality to set a selected board so that a selected board will be highlighted purple
   const router = useRouter();
@@ -85,7 +85,11 @@ const Sidebar = () => {
 
         <div className={`${!open && "scale-0"}`}>
           {boards.map((board) => (
-            <SidebarBoard boardName={board.boardName} key={board.boardId} />
+            <SidebarBoard
+              boardName={board.boardName}
+              boardId={board.boardId}
+              key={board.boardId}
+            />
           ))}
         </div>
 
