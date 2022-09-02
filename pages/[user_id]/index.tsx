@@ -35,7 +35,6 @@ export const getStaticProps = async (context: any) => {
 const UserPage = () => {
   const router = useRouter();
   const { user_id } = router.query;
-  console.log(user_id);
 
   const handleLogout = () => {
     signOut(auth);
