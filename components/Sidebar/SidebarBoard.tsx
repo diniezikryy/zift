@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { useAuthHook } from "../context/AuthContext";
+import { useAuthHook } from "../../context/AuthContext";
 
 interface SidebarBoardProps {
   boardName: string;

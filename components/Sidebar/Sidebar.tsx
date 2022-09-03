@@ -1,37 +1,15 @@
 import React, { useEffect } from "react";
-import { BsArrowLeftShort, BsSearch } from "react-icons/bs";
-import { AiFillEnvironment } from "react-icons/ai";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { useAuthHook } from "../context/AuthContext";
+import { useAuthHook } from "../../context/AuthContext";
 import { collection, DocumentData, getDocs } from "firebase/firestore";
-import { db } from "../utils/firebase";
+import { db } from "../../utils/firebase";
 import SidebarBoard from "./SidebarBoard";
+import HideSidebarButton from "./HideSidebarButton";
 
 // Presentation Component -> Recieves the array of names of board names + create new board event listener
 
-const Sidebar = () => {
-  const [open, setOpen] = useState<boolean>(true);
-  const [boards, setBoards] = useState<any>([]);
-  // To add functionality to set a selected board so that a selected board will be highlighted purple
-  const router = useRouter();
-  const { user } = useAuthHook();
-
-  useEffect(() => {
-    const colRef = collection(db, "users", user.uid, "boards");
-    getDocs(colRef)
-      .then((snapshot) => {
-        const fetchedBoards: DocumentData[] = [];
-        snapshot.docs.forEach((doc) => {
-          fetchedBoards.push({ boardName: doc.data().name, boardId: doc.id });
-        });
-        setBoards(fetchedBoards);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
+const Sidebar = ({ open, setOpen, boards, setBoards }) => {
   return (
     <div className="flex">
       <div
@@ -93,28 +71,7 @@ const Sidebar = () => {
           ))}
         </div>
 
-        <div
-          onClick={() => setOpen(!open)}
-          className={`pl-8 flex group items-center mt-auto py-3.5 rounded-r-full hover:bg-grey-light-secondary ${
-            !open && "scale-0"
-          }`}
-        >
-          <svg
-            width="18"
-            height="16"
-            xmlns="http://www.w3.org/2000/svg"
-            className="mr-3.5"
-          >
-            <path
-              d="M8.522 11.223a4.252 4.252 0 0 1-3.654-5.22l3.654 5.22ZM9 12.25A8.685 8.685 0 0 1 1.5 8a8.612 8.612 0 0 1 2.76-2.864l-.86-1.23A10.112 10.112 0 0 0 .208 7.238a1.5 1.5 0 0 0 0 1.524A10.187 10.187 0 0 0 9 13.75c.414 0 .828-.025 1.239-.074l-1-1.43A8.88 8.88 0 0 1 9 12.25Zm8.792-3.488a10.14 10.14 0 0 1-4.486 4.046l1.504 2.148a.375.375 0 0 1-.092.523l-.648.453a.375.375 0 0 1-.523-.092L3.19 1.044A.375.375 0 0 1 3.282.52L3.93.068a.375.375 0 0 1 .523.092l1.735 2.479A10.308 10.308 0 0 1 9 2.25c3.746 0 7.031 2 8.792 4.988a1.5 1.5 0 0 1 0 1.524ZM16.5 8a8.674 8.674 0 0 0-6.755-4.219A1.75 1.75 0 1 0 12.75 5v-.001a4.25 4.25 0 0 1-1.154 5.366l.834 1.192A8.641 8.641 0 0 0 16.5 8Z"
-              className="mr-4 group-hover:fill-purple-primary fill-grey-light-tertiary"
-            />
-          </svg>
-
-          <span className="text-sm font-medium text-grey-light-tertiary group-hover:text-purple-primary">
-            Hide Sidebar
-          </span>
-        </div>
+        <HideSidebarButton setOpen={setOpen} open={open} />
       </div>
     </div>
   );
