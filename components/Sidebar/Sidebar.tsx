@@ -9,7 +9,14 @@ import HideSidebarButton from "./HideSidebarButton";
 
 // Presentation Component -> Recieves the array of names of board names + create new board event listener
 
-const Sidebar = ({ open, setOpen, boards, setBoards, setSelectedBoard }) => {
+const Sidebar = ({
+  open,
+  setOpen,
+  boards,
+  setBoards,
+  setSelectedBoard,
+  selectedBoard,
+}) => {
   return (
     <div className="flex">
       <div
@@ -68,6 +75,7 @@ const Sidebar = ({ open, setOpen, boards, setBoards, setSelectedBoard }) => {
               boardId={board.boardId}
               key={board.boardId}
               setSelectedBoard={setSelectedBoard}
+              selectedBoard={selectedBoard}
             />
           ))}
         </div>

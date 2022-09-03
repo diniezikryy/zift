@@ -42,6 +42,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
         setBoards={setBoards}
         open={open}
         setOpen={setOpen}
+        selectedBoard={selectedBoard}
         setSelectedBoard={setSelectedBoard}
       />
       <div className="w-full bg-grey-light-primary">

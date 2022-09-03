@@ -28,7 +28,7 @@ const Navbar = ({ selectedBoard, open }) => {
       </div>
       <h1 className="text-2xl font-semibold ">{selectedBoard.boardName}</h1>
 
-      <button className="px-5 py-3 ml-auto text-sm text-white rounded-full bg-purple-primary">
+      <button className="px-5 py-3 ml-auto text-sm font-semibold text-white rounded-full bg-purple-primary hover:bg-purple-secondary">
         + Add New Task
       </button>
 
