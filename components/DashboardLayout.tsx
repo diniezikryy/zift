@@ -33,6 +33,8 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
       });
   }, []);
 
+  console.log(selectedBoard);
+
   return (
     <div className="flex">
       <Sidebar
@@ -40,6 +42,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
         setBoards={setBoards}
         open={open}
         setOpen={setOpen}
+        setSelectedBoard={setSelectedBoard}
       />
       <div className="w-full bg-grey-light-primary">
         <Navbar selectedBoard={selectedBoard} open={open} />

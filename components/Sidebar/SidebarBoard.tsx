@@ -5,9 +5,14 @@ import { useAuthHook } from "../../context/AuthContext";
 interface SidebarBoardProps {
   boardName: string;
   boardId: string;
+  setSelectedBoard: any;
 }
 
-const SidebarBoard = ({ boardName, boardId }: SidebarBoardProps) => {
+const SidebarBoard = ({
+  boardName,
+  boardId,
+  setSelectedBoard,
+}: SidebarBoardProps) => {
   const { user } = useAuthHook();
 
   return (
@@ -17,7 +22,12 @@ const SidebarBoard = ({ boardName, boardId }: SidebarBoardProps) => {
         query: { user_id: user.uid, dashboard_id: boardId },
       }}
     >
-      <a className="flex items-center py-4 pl-8 rounded-r-full hover:bg-grey-light-secondary group">
+      <a
+        className="flex items-center py-4 pl-8 rounded-r-full hover:bg-grey-light-secondary group"
+        onClick={() =>
+          setSelectedBoard({ boardName: boardName, boardId: boardId })
+        }
+      >
         <svg
           width="16"
           height="16"
