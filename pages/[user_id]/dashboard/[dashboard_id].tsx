@@ -7,8 +7,9 @@ import {
 } from "firebase/firestore";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
-import DashboardLayout from "../../../components/DashboardLayout";
-import ProtectedRoute from "../../../components/ProtectedRoute";
+import Dashboard from "../../../components/Dashboard/Dashboard";
+import DashboardLayout from "../../../components/Dashboard/DashboardLayout";
+import ProtectedRoute from "../../../components/HOC/ProtectedRoute";
 import { useAuthHook } from "../../../context/AuthContext";
 import { db } from "../../../utils/firebase";
 
@@ -79,8 +80,6 @@ const DashboardPage = ({ columnsId, tasks }: DashboardPageProps) => {
 
   const { user } = useAuthHook();
 
-  console.log("columns + tasks ->", columnsId, tasks);
-
   // Checks whether user is allowed to view this page
   useEffect(() => {
     if (user.uid !== user_id) {
@@ -90,9 +89,12 @@ const DashboardPage = ({ columnsId, tasks }: DashboardPageProps) => {
 
   return (
     <ProtectedRoute>
-      <div>
-        This is the user {user_id} dashboard page of id {dashboard_id}.
-      </div>
+      <Dashboard
+        user_id={user_id}
+        dashboard_id={dashboard_id}
+        columnsId={columnsId}
+        tasks={tasks}
+      />
     </ProtectedRoute>
   );
 };

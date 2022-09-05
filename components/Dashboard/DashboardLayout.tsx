@@ -1,10 +1,10 @@
 import { collection, DocumentData, getDocs } from "firebase/firestore";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { useAuthHook } from "../context/AuthContext";
-import { db } from "../utils/firebase";
+import { useAuthHook } from "../../context/AuthContext";
+import { db } from "../../utils/firebase";
 import Navbar from "./Navbar";
-import Sidebar from "./Sidebar/Sidebar";
+import Sidebar from "../Sidebar/Sidebar";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -14,7 +14,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   const [open, setOpen] = useState<boolean>(true);
   const [boards, setBoards] = useState<any>([]);
   const [selectedBoard, setSelectedBoard] = useState({});
-  const router = useRouter();
+
   const { user } = useAuthHook();
 
   useEffect(() => {
@@ -32,8 +32,6 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
         console.log(err);
       });
   }, []);
-
-  console.log(selectedBoard);
 
   return (
     <div className="flex">

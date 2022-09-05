@@ -1,14 +1,13 @@
 import { signOut } from "firebase/auth";
 import { collection, getDocs } from "firebase/firestore";
 import { useRouter } from "next/router";
-import ProtectedRoute from "../../components/ProtectedRoute";
+import ProtectedRoute from "../../components/HOC/ProtectedRoute";
 import { auth, db } from "../../utils/firebase";
 
 export const getStaticPaths = async () => {
   const colRef = collection(db, "users");
   const colSnap = await getDocs(colRef);
   const paths = colSnap.docs.map((doc) => {
-    console.log(doc.id.toString());
     return {
       params: { user_id: doc.id },
     };
