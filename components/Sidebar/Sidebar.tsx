@@ -1,9 +1,4 @@
 import React, { useEffect } from "react";
-import { useState } from "react";
-import { useRouter } from "next/router";
-import { useAuthHook } from "../../context/AuthContext";
-import { collection, DocumentData, getDocs } from "firebase/firestore";
-import { db } from "../../utils/firebase";
 import SidebarBoard from "./SidebarBoard";
 import HideSidebarButton from "./HideSidebarButton";
 
@@ -13,7 +8,6 @@ const Sidebar = ({
   open,
   setOpen,
   boards,
-  setBoards,
   setSelectedBoard,
   selectedBoard,
 }) => {

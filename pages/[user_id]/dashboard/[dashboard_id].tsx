@@ -3,8 +3,6 @@ import {
   collectionGroup,
   DocumentData,
   getDocs,
-  query,
-  where,
 } from "firebase/firestore";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
@@ -20,11 +18,6 @@ export const getStaticPaths = async () => {
 
   const colRef = collection(db, "users");
   const colSnap = await getDocs(colRef);
-
-  const boardSnap = await getDocs(collectionGroup(db, "boards"));
-  const boardPaths = boardSnap.docs.map((doc) => {
-    boardsId.push(doc.id.toString());
-  });
 
   colSnap.docs.map((doc) => {
     boardsId.forEach((boardId) => {
@@ -46,7 +39,6 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async (context: any) => {
   const user_id = context.params.user_id;
   const board_id = context.params.dashboard_id;
-  const columns: object[] = [];
 
   // Fetches the columns of the dashboard according to dashboard_id
   const columnsRef = collection(
@@ -63,18 +55,15 @@ export const getStaticProps = async (context: any) => {
 };
 
 interface DashboardPageProps {
-  columnsId: string[];
-  tasks: object[];
+  columns_ids: string[];
 }
 
-const DashboardPage = ({ columnIds }: DashboardPageProps) => {
+const DashboardPage = ({ columns_ids }: DashboardPageProps) => {
   // This page should fetch the columns data from the firestore.
   const router = useRouter();
   const { user_id, dashboard_id } = router.query;
 
   const { user } = useAuthHook();
-
-  console.log(columnIds);
 
   // Checks whether user is allowed to view this page
   useEffect(() => {
@@ -88,7 +77,7 @@ const DashboardPage = ({ columnIds }: DashboardPageProps) => {
       <Dashboard
         user_id={user_id}
         dashboard_id={dashboard_id}
-        columnsIds={columnIds}
+        columns_ids={columns_ids}
       />
     </ProtectedRoute>
   );

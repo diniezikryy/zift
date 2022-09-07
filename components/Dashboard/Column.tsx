@@ -2,23 +2,28 @@ import {
   collection,
   doc,
   DocumentData,
-  DocumentSnapshot,
   getDoc,
   getDocs,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { db } from "../../utils/firebase";
 
-const Column = ({ columnId, user_id, dashboard_id }) => {
-  const [columnName, setColumnName] = useState("");
-  const [columnTasks, setColumnTasks] = useState([]);
-  const [loading, setLoading] = useState(true);
+interface ColumnProps {
+  column_id?: string;
+  user_id?: string;
+  dashboard_id?: string;
+}
+
+const Column = ({ column_id, user_id, dashboard_id }: ColumnProps) => {
+  const [columnName, setColumnName] = useState<string>("");
+  const [columnTasks, setColumnTasks] = useState<DocumentData[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     // Fetch column name from Firestore
     const nameRef = doc(
       db,
-      `users/${user_id}/boards/${dashboard_id}/columns/${columnId}`
+      `users/${user_id}/boards/${dashboard_id}/columns/${column_id}`
     );
     getDoc(nameRef).then((documentSnapshot) => {
       setColumnName(documentSnapshot?.data()?.name);
@@ -27,7 +32,7 @@ const Column = ({ columnId, user_id, dashboard_id }) => {
     // Fetch tasks from Firestore
     const tasksRef = collection(
       db,
-      `users/${user_id}/boards/${dashboard_id}/columns/${columnId}/tasks`
+      `users/${user_id}/boards/${dashboard_id}/columns/${column_id}/tasks`
     );
     getDocs(tasksRef)
       .then((taskSnapshot) => {
@@ -47,9 +52,6 @@ const Column = ({ columnId, user_id, dashboard_id }) => {
         console.log(err);
       });
   }, []);
-
-  console.log(columnTasks);
-  console.log(columnName);
 
   return (
     <div className="border">

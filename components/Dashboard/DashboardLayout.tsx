@@ -37,7 +37,6 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
     <div className="flex">
       <Sidebar
         boards={boards}
-        setBoards={setBoards}
         open={open}
         setOpen={setOpen}
         selectedBoard={selectedBoard}
